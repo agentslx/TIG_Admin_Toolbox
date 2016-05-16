@@ -27,10 +27,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickBtScan (View v){
-        IntentIntegrator scanIntegrator = new IntentIntegrator(this);
-        scanIntegrator.initiateScan();
+        scanContinuous();
     }
-
+    public void scanContinuous() {
+        Intent intent = new Intent(this, ContinuousCaptureActivity.class);
+        startActivity(intent);
+    }
+    /*
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanningResult != null) {
@@ -45,4 +48,5 @@ public class MainActivity extends AppCompatActivity {
             toast.show();
         }
     }
+    */
 }
