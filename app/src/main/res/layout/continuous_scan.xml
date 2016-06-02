@@ -13,39 +13,58 @@
     </com.journeyapps.barcodescanner.CompoundBarcodeView>
 
     <LinearLayout
-        android:orientation="vertical"
+        android:id="@+id/buttonsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:id="@+id/buttonsLayout"
-        android:layout_toLeftOf="@+id/centerHorizont">
+        android:layout_toLeftOf="@+id/centerHorizont"
+        android:orientation="vertical">
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pause"
-            android:onClick="pause" />
+            android:onClick="pause"
+            android:text="Pause" />
 
         <Button
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Resume"
-            android:onClick="resume" />
+            android:onClick="resume"
+            android:text="Resume" />
     </LinearLayout>
 
     <View
+        android:id="@+id/centerHorizont"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_centerHorizontal="true"
-        android:id="@+id/centerHorizont" />
+        android:layout_centerHorizontal="true" />
 
     <ImageView
+        android:id="@+id/barcodePreview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@id/centerHorizont"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignTop="@id/buttonsLayout"
-        android:id="@+id/barcodePreview" />
+        android:layout_toRightOf="@id/centerHorizont" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/buttonsLayout"
+        android:layout_toRightOf="@id/centerHorizont"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Scanning..."
+        android:id="@+id/tvScanStatus"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:id="@+id/tvScanResult"
+        android:layout_below="@+id/tvScanStatus"
+        android:layout_toRightOf="@+id/buttonsLayout"
+        android:layout_toEndOf="@+id/buttonsLayout" />
 
 </RelativeLayout>

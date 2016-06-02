@@ -1,13 +1,10 @@
 package org.tig.android.tigadmintoolbox;
 
 import android.app.Activity;
-import android.content.res.Configuration;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.zxing.ResultPoint;
 import com.journeyapps.barcodescanner.BarcodeCallback;
@@ -22,17 +19,44 @@ import java.util.List;
  */
 public class ContinuousCaptureActivity extends Activity {
     private static final String TAG = ContinuousCaptureActivity.class.getSimpleName();
+
     private CompoundBarcodeView barcodeView;
+
+    private TextView tvScanStatus, tvScanResult;
+
 
     private BarcodeCallback callback = new BarcodeCallback() {
         @Override
         public void barcodeResult(BarcodeResult result) {
             if (result.getText() != null) {
                 barcodeView.setStatusText(result.getText());
+//                String res= result.getText();
+//                //manage the result string
+//                int start_index = res.indexOf(VCARD_BEGIN);
+//                if(start_index>=0){
+//                    start_index += VCARD_BEGIN.length();
+//                    if(res.indexOf(VCARD_VERSION)>=0){
+//                        start_index += res.indexOf('\n',res.indexOf(VCARD_VERSION)+VCARD_VERSION.length());
+//                    }
+//                    if(res.indexOf(FNAME_PLASH, start_index)>=0){
+//                        start_index = res.indexOf(NAME_PLASH,start_index)+NAME_PLASH.length();
+//                    } else {
+//                        start_index = res.indexOf(NAME_PLASH,start_index)+NAME_PLASH.length();
+//                    }
+//                    String name = res.substring(res.indexOf(NAME_PLASH,start_index)+NAME_PLASH.length(),
+//                                     res.indexOf('\n',res.indexOf(NAME_PLASH,vcard_index+VCARD_BEGIN.length())+NAME_PLASH.length()));
+//                    tvScanResult.setText("Name:"+name);
+//                }
+                //String name = res.substring(res.indexOf(NAME_PLASH,res.indexOf(VCARD_BEGIN))+VCARD_BEGIN.length()+NAME_PLASH.length(),
+               //         res.indexOf('\n',res.indexOf(NAME_PLASH)+NAME_PLASH.length()));
+               // String name = res.substring(res.indexOf(NAME_PLASH,res.indexOf(VCARD_BEGIN))+VCARD_BEGIN.length()+NAME_PLASH.length(),
+                //        res.indexOf('\n',res.indexOf(NAME_PLASH)+NAME_PLASH.length()));
+                //print out result
+
             }
             //Added preview of scanned barcode
-            ImageView imageView = (ImageView) findViewById(R.id.barcodePreview);
-            imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
+            //ImageView imageView = (ImageView) findViewById(R.id.barcodePreview);
+            //imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
         }
 
         @Override
@@ -48,6 +72,9 @@ public class ContinuousCaptureActivity extends Activity {
 
         barcodeView = (CompoundBarcodeView) findViewById(R.id.barcode_scanner);
         barcodeView.decodeContinuous(callback);
+
+        tvScanStatus = (TextView) findViewById(R.id.tvScanStatus);
+        tvScanResult = (TextView) findViewById(R.id.tvScanResult);
     }
 
     @Override
@@ -66,10 +93,12 @@ public class ContinuousCaptureActivity extends Activity {
 
     public void pause(View view) {
         barcodeView.pause();
+        tvScanStatus.setText("Paused");
     }
 
     public void resume(View view) {
         barcodeView.resume();
+        tvScanStatus.setText("Scanning...");
     }
 
     public void triggerScan(View view) {
