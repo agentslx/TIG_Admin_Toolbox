@@ -30,6 +30,12 @@ public class ContinuousCaptureActivity extends Activity {
         public void barcodeResult(BarcodeResult result) {
             if (result.getText() != null) {
                 barcodeView.setStatusText(result.getText());
+
+                //get the code, check the form. If valid, send to main service in order to find the infomations.
+                //then, main service will return some basic infomation to this class, as well as the MemberManagementActivity to list them out.
+
+
+
 //                String res= result.getText();
 //                //manage the result string
 //                int start_index = res.indexOf(VCARD_BEGIN);

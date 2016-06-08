@@ -2,12 +2,14 @@ package org.tig.android.tigadmintoolbox;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
+import android.widget.Button;
 
 /**
  * Created by nguye on 6/7/2016.
@@ -34,6 +36,35 @@ public class MemberManagementActivity extends Activity {
     public void scanContinuous() {
         Intent intent = new Intent(this, ContinuousCaptureActivity.class);
         startActivity(intent);
+    }
+
+    public void btMemberManagementAddNewMemberOnClick(View v){
+        // show a dialog to add new member info to database
+        final Dialog dialog = new Dialog(MemberManagementActivity.this);
+        dialog.setTitle("Add new member!");
+        dialog.setContentView(R.layout.add_new_member_dialog);
+        dialog.setCancelable(false);
+        dialog.show();
+
+        Button btDone = (Button) dialog.findViewById(R.id.btAddNewMemberDialogDone);
+        Button btCancel = (Button) dialog.findViewById(R.id.btAddNewMemberDiaglogCancel);
+
+        btDone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check the data if all are valid
+
+                //put the info to database by send command to MainService
+
+            }
+        });
+
+        btCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
     }
 
     /*
