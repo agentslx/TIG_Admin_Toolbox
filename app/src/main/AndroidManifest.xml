@@ -21,6 +21,7 @@
         <activity android:name=".ContinuousCaptureActivity">
         </activity>
         <activity android:name=".MemberManagementActivity" />
+        <service android:name=".TIGMainService" android:enabled="true" android:exported="false"></service>
 
     </application>
 
