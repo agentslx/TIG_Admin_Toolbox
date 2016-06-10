@@ -84,6 +84,15 @@ public class ServiceManager {
         doBindService();
     }
 
+    public void bindService(){
+        doBindService();
+    }
+
+    public void startNoBind() {
+        doStartService();
+        //doBindService();
+    }
+
     public void stop() {
         doUnbindService();
         doStopService();

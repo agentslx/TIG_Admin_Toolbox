@@ -57,7 +57,7 @@ public abstract class AbstractService extends Service {
     public void onCreate() {
         super.onCreate();
 
-
+        onCreateService();
 
         Log.i("MyService", "Service Started.");
     }
@@ -66,7 +66,7 @@ public abstract class AbstractService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         Log.i("MyService", "Received start id " + startId + ": " + intent);
         onStartService();
-        return START_STICKY; // run until explicitly stopped.
+        return START_NOT_STICKY; // run until explicitly stopped.
     }
 
     @Override
@@ -96,6 +96,7 @@ public abstract class AbstractService extends Service {
         }
     }
 
+    public abstract void onCreateService();
 
     public abstract void onStartService();
 

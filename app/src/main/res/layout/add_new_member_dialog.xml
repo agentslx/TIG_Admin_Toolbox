@@ -3,6 +3,25 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Cancel"
+            android:id="@+id/btAddNewMemberDiaglogCancel" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Done"
+            android:id="@+id/btAddNewMemberDialogDone" />
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -23,7 +42,7 @@
             <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/editText3" />
+                android:id="@+id/edtAddNeMeMemberID" />
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -48,7 +67,7 @@
                         android:inputType="textPersonName"
                         android:text="First name"
                         android:ems="10"
-                        android:id="@+id/editText" />
+                        android:id="@+id/edtAddNeMeFirstName" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -69,23 +88,56 @@
                         android:inputType="textPersonName"
                         android:text="Last Name"
                         android:ems="10"
-                        android:id="@+id/editText2" />
+                        android:id="@+id/edtAddNeMeLastName" />
                 </LinearLayout>
             </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Birthday"
-                android:id="@+id/textView4" />
-
-            <EditText
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="date"
-                android:ems="10"
-                android:id="@+id/editText4" />
+                android:layout_height="match_parent">
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Birthday"
+                        android:id="@+id/textView4" />
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="date"
+                        android:ems="10"
+                        android:id="@+id/edtAddNeMeBirthday" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceLarge"
+                        android:text="Gender"
+                        android:id="@+id/textView9" />
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Male"
+                        android:id="@+id/btAddNeMeMemberGender" />
+                </LinearLayout>
+            </LinearLayout>
 
             <LinearLayout
                 android:orientation="horizontal"
@@ -110,7 +162,7 @@
                         android:inputType="textPersonName"
                         android:text="TIG"
                         android:ems="10"
-                        android:id="@+id/editText5" />
+                        android:id="@+id/edtAddNeMeORG" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -128,7 +180,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/editText10" />
+                        android:id="@+id/edtAddNeMeMemberType" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -144,7 +196,7 @@
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
-                android:id="@+id/editText6" />
+                android:id="@+id/edtAddNeMeTel" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -158,40 +210,9 @@
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:ems="10"
-                android:id="@+id/editText7" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="Address"
-                android:id="@+id/textView8" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/editText8" />
+                android:id="@+id/edtAddNeMeEmail" />
 
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Cancel"
-            android:id="@+id/btAddNewMemberDiaglogCancel" />
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Done"
-            android:id="@+id/btAddNewMemberDialogDone" />
-
-    </LinearLayout>
 
 </LinearLayout>

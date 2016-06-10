@@ -3,32 +3,23 @@ package org.tig.android.tigadmintoolbox;
 /**
  * Created by nguye on 6/8/2016.
  */
-public class TIGMember {
+public class TIGMember extends TIGMemberShort {
 
-    private String ID, fistName, lastName, birthDay, org, tel, email, address;
+    private String birthDay;
 
-    public String getID() {
-        return ID;
-    }
+    private String tel;
+    private String email;
 
-    public void setID(String ID) {
+    public TIGMember(String ID, String fistName, String lastName, String birthDay, boolean gender, String org, String type, String tel, String email) {
         this.ID = ID;
-    }
-
-    public String getFistName() {
-        return fistName;
-    }
-
-    public void setFistName(String fistName) {
         this.fistName = fistName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
         this.lastName = lastName;
+        this.birthDay = birthDay;
+        this.org = org;
+        this.tel = tel;
+        this.email = email;
+        this.type = type;
+        this.gender = gender;
     }
 
     public String getBirthDay() {
@@ -47,27 +38,11 @@ public class TIGMember {
         this.tel = tel;
     }
 
-    public String getOrg() {
-        return org;
-    }
-
-    public void setOrg(String org) {
-        this.org = org;
-    }
-
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
     }
 }
