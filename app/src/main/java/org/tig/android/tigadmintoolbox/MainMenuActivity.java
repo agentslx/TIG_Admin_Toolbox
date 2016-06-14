@@ -37,7 +37,7 @@ public class MainMenuActivity extends Activity {
         btActivitiesManagement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainMenuActivity.this,));
+                startActivity(new Intent(MainMenuActivity.this,ActivtiesManagementActivity.class));
             }
         });
     }

@@ -1,7 +1,13 @@
 package org.tig.android.tigadmintoolbox;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.os.RemoteException;
+import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.TextView;
@@ -11,6 +17,7 @@ import com.journeyapps.barcodescanner.BarcodeCallback;
 import com.journeyapps.barcodescanner.BarcodeResult;
 import com.journeyapps.barcodescanner.CompoundBarcodeView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,45 +31,57 @@ public class ContinuousCaptureActivity extends Activity {
 
     private TextView tvScanStatus, tvScanResult;
 
+    private String actID;
+    private ArrayList<String> memID;
+
+//    private ServiceManager serviceManager;
+
+    private ArrayList<TIGMemberShort> allMem;
 
     private BarcodeCallback callback = new BarcodeCallback() {
         @Override
         public void barcodeResult(BarcodeResult result) {
             if (result.getText() != null) {
-                barcodeView.setStatusText(result.getText());
+                String res = result.getText().toString();
 
-                //get the code, check the form. If valid, send to main service in order to find the infomations.
-                //then, main service will return some basic infomation to this class, as well as the MemberManagementActivity to list them out.
+                String show = "Scan: " + res;
 
+                for (TIGMemberShort m :
+                        allMem) {
+                    if(m.getID().matches(res)){
+                        show = show + "\n" + "Member: " + m.getLastName() + " " +m.getFistName();
+                        boolean check = true;
+                        for (String i :
+                                memID) {
+                            if(i.matches(m.getID())){
+                                check = false;
+                                show = show + "\n" + "This member was already checked in!";
+                                break;
+                            }
+                        }
+                        if(check) {
+                            show = show + "\n" + "checked in!";
+                            ArrayList<String> a = new ArrayList();
+                            a.add(actID);
+                            a.add(m.getID());
+                            memID.add(m.getID());
+//                            try {
+//                                serviceManager.send(Message.obtain(null,ActivtiesManagementActivity.ACTIVITIES_MANAGER_ADD_NEW_MEMBER_CHECKIN,a));
+//                            } catch (RemoteException e) {
+//                                e.printStackTrace();
+//                            }
+                            Intent intent = new Intent(ActivtiesManagementActivity.KEY_PASS_RESULT_SCAN_CODE);
+                            intent.putStringArrayListExtra(ActivtiesManagementActivity.KEY_REI_RESULT_SCAN_CODE,a);
+                            LocalBroadcastManager.getInstance(ContinuousCaptureActivity.this).sendBroadcast(intent);
 
-
-//                String res= result.getText();
-//                //manage the result string
-//                int start_index = res.indexOf(VCARD_BEGIN);
-//                if(start_index>=0){
-//                    start_index += VCARD_BEGIN.length();
-//                    if(res.indexOf(VCARD_VERSION)>=0){
-//                        start_index += res.indexOf('\n',res.indexOf(VCARD_VERSION)+VCARD_VERSION.length());
-//                    }
-//                    if(res.indexOf(FNAME_PLASH, start_index)>=0){
-//                        start_index = res.indexOf(NAME_PLASH,start_index)+NAME_PLASH.length();
-//                    } else {
-//                        start_index = res.indexOf(NAME_PLASH,start_index)+NAME_PLASH.length();
-//                    }
-//                    String name = res.substring(res.indexOf(NAME_PLASH,start_index)+NAME_PLASH.length(),
-//                                     res.indexOf('\n',res.indexOf(NAME_PLASH,vcard_index+VCARD_BEGIN.length())+NAME_PLASH.length()));
-//                    tvScanResult.setText("Name:"+name);
-//                }
-                //String name = res.substring(res.indexOf(NAME_PLASH,res.indexOf(VCARD_BEGIN))+VCARD_BEGIN.length()+NAME_PLASH.length(),
-               //         res.indexOf('\n',res.indexOf(NAME_PLASH)+NAME_PLASH.length()));
-               // String name = res.substring(res.indexOf(NAME_PLASH,res.indexOf(VCARD_BEGIN))+VCARD_BEGIN.length()+NAME_PLASH.length(),
-                //        res.indexOf('\n',res.indexOf(NAME_PLASH)+NAME_PLASH.length()));
-                //print out result
+                        }
+                        break;
+                    }
+                }
+//                Intent intent = new Intent()
+                barcodeView.setStatusText(show);
 
             }
-            //Added preview of scanned barcode
-            //ImageView imageView = (ImageView) findViewById(R.id.barcodePreview);
-            //imageView.setImageBitmap(result.getBitmapWithResultPoints(Color.YELLOW));
         }
 
         @Override
@@ -81,6 +100,28 @@ public class ContinuousCaptureActivity extends Activity {
 
         tvScanStatus = (TextView) findViewById(R.id.tvScanStatus);
         tvScanResult = (TextView) findViewById(R.id.tvScanResult);
+
+        Intent intent = getIntent();
+        actID = intent.getStringExtra(ActivtiesManagementActivity.KEY_PASS_ACT_ID);
+        memID = intent.getStringArrayListExtra(ActivtiesManagementActivity.KEY_PASS_ACT_MEMBER);
+        allMem = (ArrayList<TIGMemberShort>) intent.getSerializableExtra(ActivtiesManagementActivity.KEY_PASS_ACT_MEMBER_ID_LIST);
+
+//        serviceManager = intent.getParcelableExtra(ActivtiesManagementActivity.KEY_PASS_SERVICE_MANAGER);
+
+        for (int i = 0; i < allMem.size(); i++) {
+            Log.i("Continuous Capture","Received allMemList: "+allMem.get(i).getID() + " " + allMem.get(i).getLastName() + " " + allMem.get(i).getFistName());
+        }
+
+//        serviceManager = new ServiceManager(ContinuousCaptureActivity.this,TIGMainService.class,new Handler(){
+//            @Override
+//            public void handleMessage(Message msg) {
+//                super.handleMessage(msg);
+//            }
+//        });
+//        serviceManager.start();
+
+//        serviceManager = new ServiceManager(ContinuousCaptureActivity.this,TIGMainService.class,handler);
+//        serviceManager.start();
     }
 
     @Override
@@ -95,6 +136,34 @@ public class ContinuousCaptureActivity extends Activity {
         super.onPause();
 
         barcodeView.pause();
+    }
+
+    @Override
+    public void onBackPressed() {
+
+//        if(newMemID.size()>0){
+//            Intent intent = new Intent();
+//            intent.putStringArrayListExtra(ActivtiesManagementActivity.KEY_REI_ACT_MEMBER,newMemID);
+//            intent.putExtra(ActivtiesManagementActivity.KEY_REI_ACT_ID,actID);
+//            setResult(ActivtiesManagementActivity.SCAN_RESULT_CODE,intent);
+//        }
+
+        finish();
+    }
+
+    @Override
+    protected void onDestroy() {
+
+//        Intent intent = new Intent();
+//        intent.putStringArrayListExtra(ActivtiesManagementActivity.KEY_REI_ACT_MEMBER,newMemID);
+//        intent.putExtra(ActivtiesManagementActivity.KEY_REI_ACT_ID,actID);
+//        setResult(ActivtiesManagementActivity.SCAN_RESULT_CODE,intent);
+//
+        super.onDestroy();
+//        try {
+//            serviceManager.unbind();
+//        } catch (Throwable t) {
+//        }
     }
 
     public void pause(View view) {

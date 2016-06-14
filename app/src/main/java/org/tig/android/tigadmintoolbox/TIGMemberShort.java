@@ -1,9 +1,11 @@
 package org.tig.android.tigadmintoolbox;
 
+import java.io.Serializable;
+
 /**
  * Created by nguye on 6/10/2016.
  */
-public class TIGMemberShort {
+public class TIGMemberShort implements Serializable{
 
     public static final boolean MALE = true;
     public static final boolean FEMALE = false;

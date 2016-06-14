@@ -2,14 +2,14 @@ package org.tig.android.tigadmintoolbox;
 
 /*
  * This example demonstrates a good way to communicate between Activity and Service.
- * 
+ *
  * 1. Implement a service by inheriting from AbstractService
  * 2. Add a ServiceManager to your activity
  *   - Control the service with ServiceManager.start() and .stop()
- *   - Send messages to the service via ServiceManager.send() 
+ *   - Send messages to the service via ServiceManager.send()
  *   - Receive messages with by passing a Handler in the constructor
  * 3. Send and receive messages on the service-side using send() and onReceiveMessage()
- * 
+ *
  * Author: Philipp C. Heckel; based on code by Lance Lefebure from
  *         http://stackoverflow.com/questions/4300291/example-communication-between-activity-and-service-using-messaging
  * Source: https://code.launchpad.net/~binwiederhier/+junk/android-service-example
@@ -26,10 +26,14 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.os.Messenger;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.os.RemoteException;
 import android.util.Log;
 
-public class ServiceManager {
+import java.io.Serializable;
+
+public class ServiceManager{
     private Class<? extends AbstractService> mServiceClass;
     private Context mActivity;
     private boolean mIsBound;
@@ -99,7 +103,7 @@ public class ServiceManager {
     }
 
     /**
-     * Use with caution (only in Activity.onDestroy())! 
+     * Use with caution (only in Activity.onDestroy())!
      */
     public void unbind() {
         doUnbindService();

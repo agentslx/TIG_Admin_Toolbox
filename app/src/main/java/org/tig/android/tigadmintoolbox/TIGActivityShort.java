@@ -1,12 +1,16 @@
 package org.tig.android.tigadmintoolbox;
 
+import java.util.ArrayList;
+
 /**
  * Created by nguye on 6/11/2016.
  */
 public class TIGActivityShort {
     protected String ID, name, type, location, startTime, endTime, shortIntro;
 
-    public TIGActivityShort(String ID, String name, String type, String location, String startTime, String shortIntro, String endTime) {
+    protected ArrayList<String> memberIDCheckin;
+
+    public TIGActivityShort(String ID, String name, String type, String location, String startTime, String endTime, String shortIntro) {
         this.ID = ID;
         this.name = name;
         this.type = type;
@@ -14,9 +18,14 @@ public class TIGActivityShort {
         this.startTime = startTime;
         this.shortIntro = shortIntro;
         this.endTime = endTime;
+        memberIDCheckin = new ArrayList<>();
     }
 
     public TIGActivityShort(){}
+
+    public ArrayList<String> getMemberIDCheckin() {
+        return memberIDCheckin;
+    }
 
     public String getID() {
         return ID;

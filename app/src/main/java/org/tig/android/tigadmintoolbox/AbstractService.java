@@ -41,6 +41,7 @@ public abstract class AbstractService extends Service {
                 case MSG_REGISTER_CLIENT:
                     Log.i("MyService", "Client registered: " + msg.replyTo);
                     mClients.add(msg.replyTo);
+                    onServiceReady();
                     break;
                 case MSG_UNREGISTER_CLIENT:
                     Log.i("MyService", "Client un-registered: " + msg.replyTo);
@@ -103,5 +104,7 @@ public abstract class AbstractService extends Service {
     public abstract void onStopService();
 
     public abstract void onReceiveMessage(Message msg);
+
+    public abstract void onServiceReady();
 
 }

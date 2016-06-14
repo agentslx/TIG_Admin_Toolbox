@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * Created by nguye on 6/7/2016.
  */
 public class MemberManagementActivity extends Activity {
-    public static final int MY_PERMISSIONS_REQUEST_CAMERA = 1010;
+
 
     public static final int MESSEGE_TO_SERVICE_ADD_NEW_MEMBER = 3030;
     public static final int MESSEGE_TO_SERVICE_REFESH_MEMBER_LIST = 3040;
@@ -92,28 +92,11 @@ public class MemberManagementActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        serviceManager.stop();
+        //serviceManager.stop();
         try {
             serviceManager.unbind();
         } catch (Throwable t) {
         }
-    }
-
-    public void onClickBtScan(View v) {
-        if (ContextCompat.checkSelfPermission(MemberManagementActivity.this,
-                Manifest.permission.CAMERA)
-                == PackageManager.PERMISSION_GRANTED) {
-            scanContinuous();
-        } else {
-            ActivityCompat.requestPermissions(MemberManagementActivity.this,
-                    new String[]{Manifest.permission.CAMERA},
-                    MY_PERMISSIONS_REQUEST_CAMERA);
-        }
-    }
-
-    public void scanContinuous() {
-        Intent intent = new Intent(this, ContinuousCaptureActivity.class);
-        startActivity(intent);
     }
 
     public void btMemberManagementAddNewMemberOnClick(View v) {
@@ -121,7 +104,6 @@ public class MemberManagementActivity extends Activity {
         final Dialog dialog = new Dialog(MemberManagementActivity.this);
         dialog.setTitle("Add new member!");
         dialog.setContentView(R.layout.add_new_member_dialog);
-        dialog.setCancelable(false);
         dialog.show();
 
         Button btDone = (Button) dialog.findViewById(R.id.btAddNewMemberDialogDone);
@@ -204,7 +186,7 @@ public class MemberManagementActivity extends Activity {
         AddlistItem addlistItem = new AddlistItem(MemberManagementActivity.this);
         for (TIGMemberShort m :
                 memberList) {
-            View v = addlistItem.addMemberListItem(m.getFistName() + m.getLastName(), m.getID());
+            View v = addlistItem.addMemberListItem(m.getLastName() + " " +m.getFistName(), m.getID());
             listMemberParent.addView(v);
         }
     }

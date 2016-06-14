@@ -28,4 +28,13 @@ public class AddlistItem {
         tvID.setText(id);
         return v;
     }
+
+    public View addActListItem(String name, String shortIntro) {
+        View v = inflater.inflate(R.layout.activity_list_item, null);
+        TextView tvName = (TextView) v.findViewById(R.id.tvActivityListItemName);
+        TextView tvShortIntro = (TextView) v.findViewById(R.id.tvActivityListItemShortIntro);
+        tvName.setText(name);
+        tvShortIntro.setText(shortIntro);
+        return v;
+    }
 }

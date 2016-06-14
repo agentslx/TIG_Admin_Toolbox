@@ -51,8 +51,9 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -65,15 +66,15 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
-                        android:text="First name"
                         android:ems="10"
                         android:id="@+id/edtAddNeMeFirstName" />
                 </LinearLayout>
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -86,7 +87,6 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:inputType="textPersonName"
-                        android:text="Last Name"
                         android:ems="10"
                         android:id="@+id/edtAddNeMeLastName" />
                 </LinearLayout>
@@ -134,7 +134,7 @@
                     <Button
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="Male"
+                        android:text="MALE"
                         android:id="@+id/btAddNeMeMemberGender" />
                 </LinearLayout>
             </LinearLayout>
@@ -146,8 +146,9 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent">
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -167,8 +168,9 @@
 
                 <LinearLayout
                     android:orientation="vertical"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_width="1dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -180,7 +182,8 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:id="@+id/edtAddNeMeMemberType" />
+                        android:id="@+id/edtAddNeMeMemberType"
+                        android:text="Member" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -192,11 +195,12 @@
                 android:id="@+id/textView6" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="phone"
                 android:ems="10"
-                android:id="@+id/edtAddNeMeTel" />
+                android:id="@+id/edtAddNeMeTel"
+                android:text="+84" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -206,11 +210,12 @@
                 android:id="@+id/textView7" />
 
             <EditText
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textEmailAddress"
                 android:ems="10"
-                android:id="@+id/edtAddNeMeEmail" />
+                android:id="@+id/edtAddNeMeEmail"
+                android:text="\@gmail.com" />
 
         </LinearLayout>
     </ScrollView>
